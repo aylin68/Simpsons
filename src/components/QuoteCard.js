@@ -1,20 +1,19 @@
 import React from "react";
 
 const QuoteCard = (props) => {
-  const { value, simpsons, handleClick } = props;
+  const { gotData, simpsons, handleClick } = props;
   return (
     <>
-      <button onClick={handleClick}>quote</button>
-      {value ? (
+      <button onClick={handleClick}>Get Data</button>
+      {gotData ? (
         <div>
           <h1>{simpsons.character}</h1>
           <img src={simpsons.image} />
           <p>{simpsons.quote}</p>
         </div>
-      ) : (
-        "nothing"
-      )}
+      ) : null}
     </>
   );
 };
 export default QuoteCard;
+
