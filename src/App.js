@@ -4,21 +4,26 @@ import QuoteCard from "./components/QuoteCard.js";
 import "./App.css";
 
 function App() {
-  const [simpsons, setSimpsons] = useState(
+  const [simpsons, setSimpsons] = useState([]);
+  const [gotData, setGotData] = useState(false);
+
+  const fetchData = (e) => {
+    e.preventDefault();
     axios
       .get("https://simpsons-quotes-api.herokuapp.com/quotes")
       .then((res) => res.data)
-      .then((data) => data[0])
-  );
-  const [value, setValue] = useState(false);
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    setValue(!value);
+      .then((data) => {
+        setSimpsons(data[0]);
+        setGotData(true);
+      });
   };
   return (
     <div className="App">
-      <QuoteCard value={value} simpsons={simpsons} handleClick={handleClick} />
+      <QuoteCard
+        gotData={gotData}
+        simpsons={simpsons}
+        handleClick={fetchData}
+      />
     </div>
   );
 }
